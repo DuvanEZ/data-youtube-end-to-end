@@ -102,9 +102,14 @@ Validación.
 ```bash
 aws s3 ls
 ```
-Create an S3 bucket on your current region. Remember that name should be rame unique.
+
 ```bash
+# Create an S3 bucket on your current region. Remember that name should be rame unique.
 aws s3api create-bucket --bucket youtube-raw-data-json --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1
+```
+```bash
+# To copy all JSON Reference data to same location:
+aws s3 cp . s3://dataengineering-on-youtube-raw-useast1-dev-dz/youtube/raw_statistics_reference_data/ --recursive --exclude "*" --include "*.json"
 ```
 
 
