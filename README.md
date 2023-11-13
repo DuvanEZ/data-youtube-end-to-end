@@ -37,7 +37,7 @@
   <a href="#sparkles-goals">Goals</a> &#xa0; | &#xa0;
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Archaitecture</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
@@ -78,16 +78,40 @@ The following tools were used in this project:
 - [Python](https://www.python.org/)
 - [Pandas](https://pandas.pydata.org/)
 
-## :white_check_mark: Requirements ##
+## :white_check_mark: Architecture ##
 
 ![Architecture](https://github.com/DuvanEZ/data-youtube-end-to-end/blob/master/architecture.jpeg)
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+
+
 
 ## :checkered_flag: Starting ##
 
+Useful links mentioned in the video - 
+1. Create Your AWS Account - https://aws.amazon.com/premiumsupport...
+2. Download AWS CLI - https://aws.amazon.com/cli/
+
+ Instala AWS CLI
+Configuración de AWS CLI: Una vez que AWS CLI está instalado, puedes configurarlo ejecutando el siguiente comando en tu terminal:
+
 ```bash
-# Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/dataengineer
+aws configure
+```
+Ingreso de credenciales: Se te pedirá que ingreses tus credenciales de AWS, que incluyen tu Access Key ID y Secret Access Key. Estas se pueden obtener desde la consola de administración de AWS en la sección de IAM. También se te pedirá que ingreses la región predeterminada (por ejemplo, us-west-2, us-east-1, etc.) y el formato de salida predeterminado (por ejemplo, json, text, etc.).
+
+Validación.
+```bash
+aws s3 ls
+```
+Create an S3 bucket on your current region. Remember that name should be rame unique.
+```bash
+aws s3api create-bucket --bucket youtube-raw-data-json --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1
+```
+
+
+
+
+```bash
+#
 
 # Access
 $ cd dataengineer
