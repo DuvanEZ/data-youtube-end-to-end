@@ -111,24 +111,51 @@ aws s3api create-bucket --bucket youtube-raw-data-json --region us-east-1 --crea
 # To copy all JSON Reference data to same location:
 aws s3 cp . s3://dataengineering-on-youtube-raw-useast1-dev-dz/youtube/raw_statistics_reference_data/ --recursive --exclude "*" --include "*.json"
 ```
-
-
-
+```bash
+# Create an S3 bucket on your current region. This is where aws glue will save the data after the ETL procces.
+aws s3api create-bucket --bucket de-youtube-clean-data-json --region us-east-1
+```
+```bash
+# Crear la base de datos de Glue
+aws glue create-database --database-input Name=my_database
+```
+create your lambda function on this case we will transform for json to parquet just getting the arry 
+Item.
+zip your lambda-function-code. 
+Then execute.
 
 ```bash
-#
-
-# Access
-$ cd dataengineer
-
-# Install dependencies
-$ yarn
-
-# Run the project
-$ yarn start
-
-# The server will initialize in the <http://localhost:3000>
+aws lambda create-function --function-name de-youtube-lambda-json-parquet \
+--zip-file fileb://lambda_function_json_parquet.zip --handler lambda_function.lambda_handler \
+--runtime python3.8 --role arn:aws:iam::#######:role/de-youtube-raw-useast1-lambda-role
 ```
+Inside Lambda Fucntion create enviroment variables.
+
+glue_catalog_db_name:   	yourdb
+glue_catalog_table_name:	yourtable
+s3_cleansed_layer:      	s3://yours3/youtube
+write_data_operation:   	append
+![Alt text](image-2.png)
+Edit general configuration:
+Time: 3min 3s Memory:256
+![Alt text](image-1.png)
+
+Añadir capas.
+![Alt text](image-3.png)
+
+crear evento para testing
+![Alt text](image-4.png)
+configurar evento
+
+
+
+
+
+
+
+
+
+
 
 ## :memo: License ##
 
@@ -140,3 +167,4 @@ Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" targe
 &#xa0;
 
 <a href="#top">Back to top</a>
+
